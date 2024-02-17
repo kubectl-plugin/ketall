@@ -1,9 +1,4 @@
 # ketall
-[![Build Status](https://travis-ci.com/kubectl-plugin/ketall.svg?branch=master)](https://travis-ci.com/kubectl-plugin/ketall)
-[![Go Report Card](https://goreportcard.com/badge/kubectl-plugin/ketall)](https://goreportcard.com/report/kubectl-plugin/ketall)
-[![LICENSE](https://img.shields.io/github/license/kubectl-plugin/ketall.svg)](https://github.com/kubectl-plugin/ketall/blob/master/LICENSE)
-[![Releases](https://img.shields.io/github/release-pre/kubectl-plugin/ketall.svg)](https://github.com/kubectl-plugin/ketall/releases)
-<!-- [![Code Coverage](https://codecov.io/gh/kubectl-plugin/ketall/branch/master/graph/badge.svg)](https://codecov.io/gh/kubectl-plugin/ketall) -->
 
 Kubectl plugin to show really all kubernetes resources
 
