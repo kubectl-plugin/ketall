@@ -1,5 +1,6 @@
 /*
 Copyright 2019 Cornelius Weig
+Copyright 2024 The kubectl-plugin Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -25,10 +26,10 @@ import (
 	"k8s.io/client-go/util/homedir"
 	"k8s.io/klog/v2"
 
-	"github.com/corneliusweig/ketall/cmd/internal"
-	ketall "github.com/corneliusweig/ketall/internal"
-	"github.com/corneliusweig/ketall/internal/constants"
-	"github.com/corneliusweig/ketall/internal/options"
+	"github.com/kubectl-plugin/ketall/cmd/internal"
+	ketall "github.com/kubectl-plugin/ketall/internal"
+	"github.com/kubectl-plugin/ketall/internal/constants"
+	"github.com/kubectl-plugin/ketall/internal/options"
 )
 
 var (
@@ -43,7 +44,7 @@ Ketall retrieves all resources which allow to be fetched. This complements the
 usual "kubectl get all" command, which excludes all cluster-level and some
 namespaced resources.
 
-More on https://github.com/corneliusweig/ketall/blob/v1.3.8/doc/USAGE.md#usage
+More on https://github.com/kubectl-plugin/ketall/blob/v1.3.8/doc/USAGE.md#usage
 `
 	ketallExamples = `
   Get all resources, excluding events and podmetrics

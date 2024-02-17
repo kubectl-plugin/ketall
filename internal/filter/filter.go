@@ -1,5 +1,6 @@
 /*
 Copyright 2019 Cornelius Weig
+Copyright 2024 The kubectl-plugin Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,8 +22,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/corneliusweig/ketall/internal/constants"
-	"github.com/corneliusweig/ketall/internal/util"
+	"github.com/kubectl-plugin/ketall/internal/constants"
+	"github.com/kubectl-plugin/ketall/internal/util"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 	"k8s.io/apimachinery/pkg/api/meta"

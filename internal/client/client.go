@@ -1,5 +1,6 @@
 /*
 Copyright 2019 Cornelius Weig
+Copyright 2024 The kubectl-plugin Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24,8 +25,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/corneliusweig/ketall/internal/constants"
-	"github.com/corneliusweig/ketall/internal/util"
+	"github.com/kubectl-plugin/ketall/internal/constants"
+	"github.com/kubectl-plugin/ketall/internal/util"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 	"golang.org/x/sync/semaphore"
@@ -177,7 +178,7 @@ func fetchResourcesBulk(flags resource.RESTClientGetter, grs ...groupResource) (
 
 // Fetches all objects of the given resources one-by-one. This can be used as a fallback when fetchResourcesBulk fails.
 func fetchResourcesIncremental(ctx context.Context, flags resource.RESTClientGetter, grs ...groupResource) (runtime.Object, error) {
-	// TODO(corneliusweig): this needs to properly pass ctx around
+	// TODO(kubectl-plugin): this needs to properly pass ctx around
 	klog.V(2).Info("Fetch resources incrementally")
 	start := time.Now()
 

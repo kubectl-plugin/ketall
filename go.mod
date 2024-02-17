@@ -1,4 +1,6 @@
-module github.com/corneliusweig/ketall
+module github.com/kubectl-plugin/ketall
+
+go 1.16
 
 require (
 	github.com/blang/semver v3.5.1+incompatible
@@ -15,5 +17,3 @@ require (
 	k8s.io/client-go v0.21.2
 	k8s.io/klog/v2 v2.80.1
 )
-
-go 1.16

@@ -1,5 +1,6 @@
 /*
 Copyright 2019 Cornelius Weig
+Copyright 2024 The kubectl-plugin Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -20,7 +21,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/corneliusweig/ketall/internal/util"
+	"github.com/kubectl-plugin/ketall/internal/util"
 	"github.com/stretchr/testify/assert"
 	"k8s.io/apimachinery/pkg/api/meta"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

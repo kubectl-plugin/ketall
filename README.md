@@ -1,9 +1,9 @@
 # ketall
-[![Build Status](https://travis-ci.com/corneliusweig/ketall.svg?branch=master)](https://travis-ci.com/corneliusweig/ketall)
-[![Go Report Card](https://goreportcard.com/badge/corneliusweig/ketall)](https://goreportcard.com/report/corneliusweig/ketall)
-[![LICENSE](https://img.shields.io/github/license/corneliusweig/ketall.svg)](https://github.com/corneliusweig/ketall/blob/master/LICENSE)
-[![Releases](https://img.shields.io/github/release-pre/corneliusweig/ketall.svg)](https://github.com/corneliusweig/ketall/releases)
-<!-- [![Code Coverage](https://codecov.io/gh/corneliusweig/ketall/branch/master/graph/badge.svg)](https://codecov.io/gh/corneliusweig/ketall) -->
+[![Build Status](https://travis-ci.com/kubectl-plugin/ketall.svg?branch=master)](https://travis-ci.com/kubectl-plugin/ketall)
+[![Go Report Card](https://goreportcard.com/badge/kubectl-plugin/ketall)](https://goreportcard.com/report/kubectl-plugin/ketall)
+[![LICENSE](https://img.shields.io/github/license/kubectl-plugin/ketall.svg)](https://github.com/kubectl-plugin/ketall/blob/master/LICENSE)
+[![Releases](https://img.shields.io/github/release-pre/kubectl-plugin/ketall.svg)](https://github.com/kubectl-plugin/ketall/releases)
+<!-- [![Code Coverage](https://codecov.io/gh/kubectl-plugin/ketall/branch/master/graph/badge.svg)](https://codecov.io/gh/kubectl-plugin/ketall) -->
 
 Kubectl plugin to show really all kubernetes resources
 
@@ -72,18 +72,18 @@ When using the binaries for installation, also have a look at [doc/USAGE](doc/US
 
 #### Linux
 ```bash
-curl -Lo ketall.gz https://github.com/corneliusweig/ketall/releases/download/v1.3.8/ketall-amd64-linux.tar.gz && \
+curl -Lo ketall.gz https://github.com/kubectl-plugin/ketall/releases/download/v1.3.8/ketall-amd64-linux.tar.gz && \
   gunzip ketall.gz && chmod +x ketall && mv ketall $GOPATH/bin/
 ```
 
 #### OSX
 ```bash
-curl -Lo ketall.gz https://github.com/corneliusweig/ketall/releases/download/v1.3.8/ketall-amd64-darwin.tar.gz && \
+curl -Lo ketall.gz https://github.com/kubectl-plugin/ketall/releases/download/v1.3.8/ketall-amd64-darwin.tar.gz && \
   gunzip ketall.gz && chmod +x ketall && mv ketall $GOPATH/bin/
 ```
 
 #### Windows
-[https://github.com/corneliusweig/ketall/releases/download/v1.3.8/ketall-amd64-windows.zip](https://github.com/corneliusweig/ketall/releases/download/v1.3.8/ketall-amd64-windows.zip)
+[https://github.com/kubectl-plugin/ketall/releases/download/v1.3.8/ketall-amd64-windows.zip](https://github.com/kubectl-plugin/ketall/releases/download/v1.3.8/ketall-amd64-windows.zip)
 
 ### From source
 
@@ -107,7 +107,7 @@ Requirements:
 Compiling:
 ```bash
 mkdir ketall && chdir ketall
-curl -Lo Dockerfile https://raw.githubusercontent.com/corneliusweig/ketall/master/Dockerfile
+curl -Lo Dockerfile https://raw.githubusercontent.com/kubectl-plugin/ketall/master/Dockerfile
 docker build . -t ketall-builder
 docker run --rm -v $PWD:/go/bin/ --env PLATFORMS=$(go env GOOS) ketall-builder
 docker rmi ketall-builder

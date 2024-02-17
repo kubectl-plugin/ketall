@@ -16,7 +16,7 @@ export GO111MODULE ?= on
 export CGO_ENABLED ?= 0
 
 PROJECT   ?= ketall
-REPOPATH  ?= github.com/corneliusweig/$(PROJECT)
+REPOPATH  ?= github.com/kubectl-plugin/$(PROJECT)
 COMMIT    := $(shell git rev-parse HEAD)
 VERSION   ?= $(shell git describe --always --tags --dirty)
 GOOS      ?= $(shell go env GOOS)
@@ -96,7 +96,7 @@ dev: GO_LDFLAGS := $(subst -s -w,,$(GO_LDFLAGS))
 dev:
 	go build -race -ldflags $(GO_LDFLAGS) -o ketall main.go
 
-# TODO(corneliusweig): gox does not support the -trimpath flag, see https://github.com/mitchellh/gox/pull/138
+# TODO(zchee): gox does not support the -trimpath flag, see https://github.com/mitchellh/gox/pull/138
 build-ketall: $(GO_FILES) $(BUILDDIR)
 	GOFLAGS="-trimpath" gox -osarch="$(PLATFORMS)" -tags netgo -ldflags $(GO_LDFLAGS) -output="$(BUILDDIR)/ketall-{{.Arch}}-{{.OS}}"
 

@@ -25,12 +25,12 @@ if ! [[ -x "${DIR}/release-notes" ]]; then
 
   cd "$relnotes_dir"
   go mod init foo
-  GOBIN="${DIR}" go get github.com/corneliusweig/release-notes@v0.1.0
+  GOBIN="${DIR}" go get github.com/kubectl-plugin/release-notes@v0.1.0
   cd -
 fi
 
 # you can pass your github token with --token here if you run out of requests
-"${DIR}/release-notes" corneliusweig ketall
+"${DIR}/release-notes" kubectl-plugin ketall
 
 echo
 echo "Thanks to all the contributors for this release: "
