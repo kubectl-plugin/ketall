@@ -22,7 +22,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/blang/semver"
+	semver "github.com/blang/semver/v4"
 )
 
 var version, gitCommit, buildDate string

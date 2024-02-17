@@ -22,7 +22,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/blang/semver"
+	semver "github.com/blang/semver/v4"
 )
 
 func TestParseVersion(t *testing.T) {
