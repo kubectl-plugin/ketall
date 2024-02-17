@@ -23,19 +23,7 @@ VERSION   ?= $(shell git describe --always --tags --dirty)
 GOOS      ?= $(shell go env GOOS)
 GOPATH    ?= $(shell go env GOPATH)
 
-BUILDDIR  := out
-PLATFORMS ?= darwin/amd64 darwin/arm64 windows/amd64 linux/amd64
-DISTFILE  := $(BUILDDIR)/$(VERSION).tar.gz
-ASSETS    := \
-	$(BUILDDIR)/ketall-arm64-darwin.tar.gz \
-	$(BUILDDIR)/ketall-amd64-darwin.tar.gz \
-	$(BUILDDIR)/ketall-amd64-linux.tar.gz \
-	$(BUILDDIR)/ketall-amd64-windows.zip
-ASSETSKREW := \
-	$(BUILDDIR)/get-all-arm64-darwin.tar.gz \
-	$(BUILDDIR)/get-all-amd64-darwin.tar.gz \
-	$(BUILDDIR)/get-all-amd64-linux.tar.gz \
-	$(BUILDDIR)/get-all-amd64-windows.zip
+BUILDDIR  := bin
 CHECKSUMS  := $(patsubst %,%.sha256,$(ASSETS) $(ASSETSKREW))
 
 VERSION_PACKAGE := $(REPOPATH)/internal/version
@@ -47,21 +35,16 @@ ifdef SOURCE_DATE_EPOCH
 else
     BUILD_DATE ?= $(shell date "+$(DATE_FMT)")
 endif
-GO_LDFLAGS :="-s -w
+GO_LDFLAGS :='-s -w -linkmode=internal "-extldflags=-static-pie"
 GO_LDFLAGS += -X $(VERSION_PACKAGE).version=$(VERSION)
 GO_LDFLAGS += -X $(VERSION_PACKAGE).buildDate=$(BUILD_DATE)
-GO_LDFLAGS += -X $(VERSION_PACKAGE).gitCommit=$(COMMIT)
-GO_LDFLAGS +="
+GO_LDFLAGS += -X $(VERSION_PACKAGE).gitCommit=$(COMMIT)'
 
 ifdef ZOPFLI
   COMPRESS:=zopfli -c
 else
   COMPRESS:=gzip --best -k -c
 endif
-
-define doUPX
-	upx -9q $@
-endef
 
 GO_FILES  := $(shell find . -type f -name '*.go')
 
@@ -97,40 +80,18 @@ dev: GO_LDFLAGS := $(subst -s -w,,$(GO_LDFLAGS))
 dev:
 	go build -race -ldflags $(GO_LDFLAGS) -o ketall main.go
 
-# TODO(zchee): gox does not support the -trimpath flag, see https://github.com/mitchellh/gox/pull/138
 build-ketall: $(GO_FILES) $(BUILDDIR)
-	GOFLAGS="-trimpath" gox -osarch="$(PLATFORMS)" -tags netgo -ldflags $(GO_LDFLAGS) -output="$(BUILDDIR)/ketall-{{.Arch}}-{{.OS}}"
+	CGO_ENABLED=0 go build -o $(BUILDDIR)/ketall -v -x -trimpath -tags='osusergo,netgo,static,static_build' -buildmode=pie -ldflags=$(GO_LDFLAGS)
 
-build-get-all: $(GO_FILES) $(BUILDDIR)
-	GOFLAGS="-trimpath" gox -osarch="$(PLATFORMS)" -tags getall,netgo -ldflags $(GO_LDFLAGS) -output="$(BUILDDIR)/get-all-{{.Arch}}-{{.OS}}"
+build-kubectl-get_all: $(GO_FILES) $(BUILDDIR)
+	CGO_ENABLED=0 go build -o $(BUILDDIR)/kubectl-get_all -v -x -trimpath -tags='getall,osusergo,netgo,static,static_build' -buildmode=pie -ldflags=$(GO_LDFLAGS)
 
 .PHONY: lint
 lint:
 	hack/run_lint.sh
 
-.PRECIOUS: %.zip
-%.zip: %.exe
-	cp LICENSE $(BUILDDIR) && \
-	cd $(BUILDDIR) && \
-	zip $(patsubst $(BUILDDIR)/%, %, $@) LICENSE $(patsubst $(BUILDDIR)/%, %, $<)
-
-.PRECIOUS: %.gz
-%.gz: %
-	$(COMPRESS) "$<" > "$@"
-
-%.tar: %
-	cp LICENSE $(BUILDDIR)
-	tar cf "$@" -C $(BUILDDIR) LICENSE $(patsubst $(BUILDDIR)/%,%,$^)
-
 $(BUILDDIR):
 	mkdir -p "$@"
-
-%.sha256: %
-	shasum -a 256 $< > $@
-
-.INTERMEDIATE: $(DISTFILE:.gz=)
-$(DISTFILE:.gz=): $(BUILDDIR)
-	git archive --prefix="ketall-$(VERSION)/" --format=tar HEAD > "$@"
 
 .PHONY: deploy
 deploy: $(CHECKSUMS)
@@ -142,17 +103,3 @@ dist: $(DISTFILE)
 .PHONY: clean
 clean:
 	$(RM) -r $(BUILDDIR) ketall
-
-$(BUILDDIR)/ketall-arm64-darwin: build-ketall
-$(BUILDDIR)/ketall-amd64-darwin: build-ketall
-$(BUILDDIR)/ketall-amd64-linux: build-ketall
-	$(doUPX)
-$(BUILDDIR)/ketall-amd64-windows.exe: build-ketall
-	$(doUPX)
-
-$(BUILDDIR)/get-all-arm64-darwin: build-get-all
-$(BUILDDIR)/get-all-amd64-darwin: build-get-all
-$(BUILDDIR)/get-all-amd64-linux: build-get-all
-	$(doUPX)
-$(BUILDDIR)/get-all-amd64-windows.exe: build-get-all
-	$(doUPX)
