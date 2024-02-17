@@ -20,9 +20,10 @@ package cmd
 import (
 	"text/template"
 
-	"github.com/kubectl-plugin/ketall/internal/version"
 	"github.com/spf13/cobra"
-	"k8s.io/klog/v2"
+	klog "k8s.io/klog/v2"
+
+	"github.com/kubectl-plugin/ketall/internal/version"
 )
 
 const (

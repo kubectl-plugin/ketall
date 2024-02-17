@@ -20,10 +20,11 @@ package options
 import (
 	"testing"
 
-	"github.com/kubectl-plugin/ketall/internal/printer"
 	"github.com/stretchr/testify/assert"
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 	"k8s.io/cli-runtime/pkg/printers"
+
+	"github.com/kubectl-plugin/ketall/internal/printer"
 )
 
 func TestKAPrintFlags_ToPrinter(t *testing.T) {

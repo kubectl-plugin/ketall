@@ -25,7 +25,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/cli-runtime/pkg/printers"
-	"k8s.io/klog/v2"
+	klog "k8s.io/klog/v2"
 )
 
 type FlattenListAdapter struct {

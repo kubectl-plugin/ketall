@@ -21,8 +21,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/kubectl-plugin/ketall/internal/options"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/kubectl-plugin/ketall/internal/options"
 )
 
 func TestMainHelp(t *testing.T) {

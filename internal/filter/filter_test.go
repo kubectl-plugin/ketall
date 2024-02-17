@@ -21,11 +21,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/kubectl-plugin/ketall/internal/util"
 	"github.com/stretchr/testify/assert"
 	"k8s.io/apimachinery/pkg/api/meta"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
+
+	"github.com/kubectl-plugin/ketall/internal/util"
 )
 
 type FakeV1Obj struct {

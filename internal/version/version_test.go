@@ -20,9 +20,8 @@ package version
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
 	semver "github.com/blang/semver/v4"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestParseVersion(t *testing.T) {

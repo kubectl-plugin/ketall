@@ -22,13 +22,14 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/kubectl-plugin/ketall/internal/constants"
-	"github.com/kubectl-plugin/ketall/internal/util"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 	"k8s.io/apimachinery/pkg/api/meta"
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/klog/v2"
+	klog "k8s.io/klog/v2"
+
+	"github.com/kubectl-plugin/ketall/internal/constants"
+	"github.com/kubectl-plugin/ketall/internal/util"
 )
 
 type Predicate = func(runtime.Object) bool
