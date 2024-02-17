@@ -18,6 +18,7 @@ limitations under the License.
 package cmd
 
 import (
+	"context"
 	"flag"
 	"path/filepath"
 
@@ -77,12 +78,6 @@ var rootCmd = &cobra.Command{
 	},
 }
 
-func Execute() error {
-	rootCmd.SetOut(ketallOptions.Streams.Out)
-	rootCmd.SetErr(ketallOptions.Streams.ErrOut)
-	return rootCmd.Execute()
-}
-
 func init() {
 	klog.InitFlags(flag.CommandLine)
 	cobra.OnInitialize(initConfig)
@@ -123,4 +118,15 @@ func initConfig() {
 	viper.SetEnvPrefix("ketall")
 	viper.AutomaticEnv()
 	viper.ReadInConfig()
+}
+
+// Execute executes ketall root command.
+func Execute() error {
+	rootCmd.SetOut(ketallOptions.Streams.Out)
+	rootCmd.SetErr(ketallOptions.Streams.ErrOut)
+
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	return rootCmd.ExecuteContext(ctx)
 }
